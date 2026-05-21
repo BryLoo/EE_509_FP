@@ -1,0 +1,18 @@
+# Core deep-learning stack. Install the CUDA build of torch/torchvision that
+# matches your GPU's CUDA version -- see https://pytorch.org/get-started/locally/
+# Example (CUDA 12.1):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+
+
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch>=2.2
+torchvision>=0.17
+--extra-index-url https://download.pytorch.org/whl/cu126
+
+# Metrics, YOLO, plotting, IO
+torchmetrics>=1.3
+pycocotools>=2.0.7      # fast mAP backend used by torchmetrics
+ultralytics>=8.1        # YOLOv5/v8/v11 training + eval
+pillow>=10.0
+matplotlib>=3.7
+numpy>=1.24

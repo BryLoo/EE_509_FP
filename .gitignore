@@ -1,0 +1,28 @@
+# ---- Python ----
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# ---- The KITTI dataset (multi-GB; everyone downloads it themselves) ----
+data/kitti/
+# auto-rebuilt by data/kitti_to_yolo.py
+data/kitti_yolo/
+
+# ---- Trained weights & downloaded checkpoints (large binaries) ----
+*.pt
+*.pth
+*.onnx
+
+# ---- Training outputs & runs (regenerated each run) ----
+# outputs/
+runs/                     # Ultralytics' default run directory
+
+# ---- OS / editor cruft ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
