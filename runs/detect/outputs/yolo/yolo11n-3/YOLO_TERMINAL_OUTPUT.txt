@@ -1,0 +1,195 @@
+(.venv) PS C:\Users\blew2\Documents\GitHub\EE_509_FP> python train_yolo.py --weights yolo11n.pt --epochs 20 --imgsz 640 --batch 32
+YOLO dataset ready at data\kitti_yolo  (data file: data\kitti_yolo\kitti.yaml)
+Ultralytics 8.4.52  Python-3.14.3 torch-2.12.0+cu126 CUDA:0 (NVIDIA GeForce RTX 2060, 6144MiB)
+engine\trainer: agnostic_nms=False, amp=True, angle=1.0, augment=False, auto_augment=randaugment, batch=32, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, cls_pw=0.0, compile=False, conf=None, copy_paste=0.0, copy_paste_mode=flip, cos_lr=False, cutmix=0.0, data=data\kitti_yolo\kitti.yaml, degrees=0.0, deterministic=True, device=0, dfl=1.5, dnn=False, dropout=0.0, dynamic=False, embed=None, end2end=None, epochs=20, erasing=0.4, exist_ok=False, fliplr=0.5, flipud=0.0, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, imgsz=640, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=0.01, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.0, mode=train, model=yolo11n.pt, momentum=0.937, mosaic=1.0, multi_scale=0.0, name=yolo11n-3, nbs=64, nms=False, opset=None, optimize=False, optimizer=auto, overlap_mask=True, patience=100, perspective=0.0, plots=True, pose=12.0, pretrained=True, profile=False, project=outputs\yolo, rect=False, resume=False, retina_masks=False, rle=1.0, save=True, save_conf=False, save_crop=False, save_dir=C:\Users\blew2\Documents\GitHub\EE_509_FP\runs\detect\outputs\yolo\yolo11n-3, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.5, seed=42, shear=0.0, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=True, verbose=True, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=3.0, warmup_momentum=0.8, weight_decay=0.0005, workers=8, workspace=None
+Overriding model.yaml nc=80 with nc=3
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       464  ultralytics.nn.modules.conv.Conv             [3, 16, 3, 2]                 
+  1                  -1  1      4672  ultralytics.nn.modules.conv.Conv             [16, 32, 3, 2]                
+  2                  -1  1      6640  ultralytics.nn.modules.block.C3k2            [32, 64, 1, False, 0.25]      
+  3                  -1  1     36992  ultralytics.nn.modules.conv.Conv             [64, 64, 3, 2]                
+  4                  -1  1     26080  ultralytics.nn.modules.block.C3k2            [64, 128, 1, False, 0.25]     
+  5                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]              
+  6                  -1  1     87040  ultralytics.nn.modules.block.C3k2            [128, 128, 1, True]           
+  7                  -1  1    295424  ultralytics.nn.modules.conv.Conv             [128, 256, 3, 2]              
+  8                  -1  1    346112  ultralytics.nn.modules.block.C3k2            [256, 256, 1, True]           
+  9                  -1  1    164608  ultralytics.nn.modules.block.SPPF            [256, 256, 5]                 
+ 10                  -1  1    249728  ultralytics.nn.modules.block.C2PSA           [256, 256, 1]                 
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 13                  -1  1    111296  ultralytics.nn.modules.block.C3k2            [384, 128, 1, False]          
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 16                  -1  1     32096  ultralytics.nn.modules.block.C3k2            [256, 64, 1, False]           
+ 17                  -1  1     36992  ultralytics.nn.modules.conv.Conv             [64, 64, 3, 2]                
+ 18            [-1, 13]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 19                  -1  1     86720  ultralytics.nn.modules.block.C3k2            [192, 128, 1, False]          
+ 20                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]              
+ 21            [-1, 10]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 22                  -1  1    378880  ultralytics.nn.modules.block.C3k2            [384, 256, 1, True]           
+ 23        [16, 19, 22]  1    431257  ultralytics.nn.modules.head.Detect           [3, 16, None, [64, 128, 256]] 
+YOLO11n summary: 182 layers, 2,590,425 parameters, 2,590,409 gradients, 6.4 GFLOPs
+
+Transferred 448/499 items from pretrained weights
+Freezing layer 'model.23.dfl.conv.weight'
+AMP: running Automatic Mixed Precision (AMP) checks...
+AMP: checks passed 
+train: Fast image access  (ping: 0.30.0 ms, read: 466.253.7 MB/s, size: 863.0 KB)
+train: Scanning C:\Users\blew2\Documents\GitHub\EE_509_FP\data\kitti_yolo\labels\train.cache... 5985 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 5985/5985 1.7Git/s 0.0s
+val: Fast image access  (ping: 0.50.0 ms, read: 366.395.7 MB/s, size: 739.8 KB)
+val: Scanning C:\Users\blew2\Documents\GitHub\EE_509_FP\data\kitti_yolo\labels\val.cache... 1496 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 1496/1496 153.0Mit/s 0.0s
+optimizer: 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+optimizer: AdamW(lr=0.001429, momentum=0.9) with parameter groups 81 weight(decay=0.0), 88 weight(decay=0.0005), 87 bias(decay=0.0)
+Plotting labels to C:\Users\blew2\Documents\GitHub\EE_509_FP\runs\detect\outputs\yolo\yolo11n-3\labels.jpg... 
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to C:\Users\blew2\Documents\GitHub\EE_509_FP\runs\detect\outputs\yolo\yolo11n-3
+Starting training for 20 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       1/20      4.37G      1.425      1.742      1.134          1        640: 100% ━━━━━━━━━━━━ 188/188 2.5it/s 1:16
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 1.7it/s 14.2s
+                   all       1496       6942      0.635      0.454      0.498      0.268
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       2/20      4.82G      1.296      1.066       1.07          1        640: 100% ━━━━━━━━━━━━ 188/188 3.3it/s 56.3s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.4it/s 7.1s
+                   all       1496       6942       0.66       0.48      0.541      0.302
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       3/20      4.48G      1.253     0.9369      1.048          1        640: 100% ━━━━━━━━━━━━ 188/188 3.4it/s 55.4s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.3it/s 7.3s
+                   all       1496       6942      0.632      0.498      0.536      0.311
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       4/20      4.48G      1.229     0.8806      1.046          1        640: 100% ━━━━━━━━━━━━ 188/188 3.4it/s 54.9s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.4it/s 7.1s
+                   all       1496       6942      0.626      0.546      0.591      0.342
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       5/20      4.71G      1.185     0.8255      1.031          1        640: 100% ━━━━━━━━━━━━ 188/188 3.5it/s 54.3s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.4it/s 7.1s
+                   all       1496       6942      0.679      0.566      0.616      0.363
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       6/20       4.5G      1.147     0.7961      1.012          1        640: 100% ━━━━━━━━━━━━ 188/188 3.4it/s 55.3s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.3it/s 7.2s
+                   all       1496       6942      0.741      0.575      0.657      0.388
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       7/20      4.57G      1.128     0.7625      1.006          1        640: 100% ━━━━━━━━━━━━ 188/188 3.4it/s 55.1s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.4it/s 7.0s
+                   all       1496       6942       0.74      0.548      0.643       0.39
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       8/20      4.51G      1.101     0.7373     0.9956          1        640: 100% ━━━━━━━━━━━━ 188/188 3.4it/s 55.2s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.5it/s 6.8s
+                   all       1496       6942      0.716      0.604      0.655      0.396
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       9/20      4.41G      1.081     0.7388     0.9902          1        640: 100% ━━━━━━━━━━━━ 188/188 3.4it/s 54.9s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.4it/s 7.1s
+                   all       1496       6942      0.754      0.614      0.706      0.428
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      10/20      4.61G      1.068     0.7023     0.9837          1        640: 100% ━━━━━━━━━━━━ 188/188 3.4it/s 54.6s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.3it/s 7.2s
+                   all       1496       6942      0.764      0.636      0.697      0.429
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      11/20      4.33G      1.054     0.6897     0.9819          1        640: 100% ━━━━━━━━━━━━ 188/188 3.4it/s 54.8s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.0it/s 8.0s
+                   all       1496       6942      0.775      0.618      0.692      0.427
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      12/20      4.32G      1.035     0.6745     0.9776          1        640: 100% ━━━━━━━━━━━━ 188/188 3.5it/s 53.2s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.1it/s 7.8s
+                   all       1496       6942      0.774      0.648      0.708       0.43
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      13/20      4.28G      1.021     0.6586     0.9698          1        640: 100% ━━━━━━━━━━━━ 188/188 3.4it/s 54.7s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.1it/s 7.6s
+                   all       1496       6942      0.796      0.628      0.711      0.437
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      14/20      4.32G     0.9955     0.6372     0.9588          1        640: 100% ━━━━━━━━━━━━ 188/188 3.5it/s 53.5s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.2it/s 7.6s
+                   all       1496       6942      0.766      0.689      0.734      0.455
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      15/20      4.33G     0.9775     0.6231      0.954          1        640: 100% ━━━━━━━━━━━━ 188/188 3.5it/s 53.8s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.1it/s 7.6s
+                   all       1496       6942      0.842      0.672      0.757      0.473
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      16/20      4.33G     0.9603     0.6061     0.9464          1        640: 100% ━━━━━━━━━━━━ 188/188 3.5it/s 53.6s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.1it/s 7.8s
+                   all       1496       6942      0.846      0.674      0.765      0.478
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      17/20      4.31G     0.9433     0.5871     0.9391          1        640: 100% ━━━━━━━━━━━━ 188/188 3.5it/s 54.1s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.2it/s 7.4s
+                   all       1496       6942      0.808      0.693      0.771      0.486
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      18/20      4.34G     0.9182     0.5719     0.9318          1        640: 100% ━━━━━━━━━━━━ 188/188 3.5it/s 53.5s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.1it/s 7.7s
+                   all       1496       6942      0.859      0.677      0.782      0.499
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      19/20      4.32G     0.9049     0.5634     0.9301          1        640: 100% ━━━━━━━━━━━━ 188/188 3.5it/s 53.1s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.2it/s 7.4s
+                   all       1496       6942      0.855      0.703      0.794       0.51
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      20/20      4.28G     0.8816     0.5467     0.9213          1        640: 100% ━━━━━━━━━━━━ 188/188 3.5it/s 53.4s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 3.2it/s 7.6s
+                   all       1496       6942      0.856      0.711        0.8      0.516
+
+20 epochs completed in 0.374 hours.
+Optimizer stripped from C:\Users\blew2\Documents\GitHub\EE_509_FP\runs\detect\outputs\yolo\yolo11n-3\weights\last.pt, 5.4MB
+Optimizer stripped from C:\Users\blew2\Documents\GitHub\EE_509_FP\runs\detect\outputs\yolo\yolo11n-3\weights\best.pt, 5.4MB
+
+Validating C:\Users\blew2\Documents\GitHub\EE_509_FP\runs\detect\outputs\yolo\yolo11n-3\weights\best.pt...
+Ultralytics 8.4.52  Python-3.14.3 torch-2.12.0+cu126 CUDA:0 (NVIDIA GeForce RTX 2060, 6144MiB)
+YOLO11n summary (fused): 101 layers, 2,582,737 parameters, 0 gradients, 6.3 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 24/24 2.3it/s 10.5s
+                   all       1496       6942      0.853      0.711        0.8      0.516
+                   car       1350       5798      0.886      0.874      0.933       0.72
+            pedestrian        329        831      0.864      0.562      0.708      0.383
+               cyclist        215        313      0.809      0.696      0.759      0.445
+Speed: 0.1ms preprocess, 1.0ms inference, 0.0ms loss, 1.7ms postprocess per image
+Results saved to C:\Users\blew2\Documents\GitHub\EE_509_FP\runs\detect\outputs\yolo\yolo11n-3
+Ultralytics 8.4.52  Python-3.14.3 torch-2.12.0+cu126 CUDA:0 (NVIDIA GeForce RTX 2060, 6144MiB)
+YOLO11n summary (fused): 101 layers, 2,582,737 parameters, 0 gradients, 6.3 GFLOPs
+val: Fast image access  (ping: 0.40.0 ms, read: 666.1476.7 MB/s, size: 801.9 KB)
+val: Scanning C:\Users\blew2\Documents\GitHub\EE_509_FP\data\kitti_yolo\labels\val.cache... 1496 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 1496/1496 627.5Mit/s 0.0s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 94/94 7.7it/s 12.1s
+                   all       1496       6942      0.854      0.711        0.8      0.516
+                   car       1350       5798      0.887      0.874      0.933       0.72
+            pedestrian        329        831      0.864      0.562       0.71      0.383
+               cyclist        215        313       0.81      0.696      0.759      0.446
+Speed: 0.8ms preprocess, 2.1ms inference, 0.0ms loss, 1.3ms postprocess per image
+Results saved to C:\Users\blew2\Documents\GitHub\EE_509_FP\runs\detect\val
+{
+  "model": "yolo_yolo11n",
+  "map": 0.5164117003379788,
+  "map_50": 0.8003360659557891,
+  "map_75": 0.5623240548921082,
+  "map_per_class": {
+    "car": 0.7203955321291909,
+    "pedestrian": 0.3828740948108136,
+    "cyclist": 0.44596547407393167
+  },
+  "fps": 474.94064273753827,
+  "fps_end_to_end": 237.93395710417207,
+  "speed_ms": {
+    "preprocess": 0.8083602941175491,
+    "inference": 2.10552627005354,
+    "loss": 0.0007297459885186962,
+    "postprocess": 1.2882306149734062
+  }
+}
+Saved -> outputs\results_yolo_yolo11n.json
